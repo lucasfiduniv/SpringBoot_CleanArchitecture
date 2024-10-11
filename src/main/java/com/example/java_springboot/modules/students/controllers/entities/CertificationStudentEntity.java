@@ -8,6 +8,6 @@ public class CertificationStudentEntity {
     private UUID id;
     private UUID studentID;
     private String technology;
-    private int grate;
+    private int grade;
     List<AnswersCertificationsEntity> answersCertificationsEntities;
 }
