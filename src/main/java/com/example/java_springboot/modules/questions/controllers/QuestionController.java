@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.java_springboot.modules.questions.entities.QuestionEntity;
-import com.example.java_springboot.modules.questions.repositories.QuestionRepository;
+import com.example.java_springboot.modules.questions.dto.QuestionResultDTO;
+import com.example.java_springboot.modules.questions.useCases.QuestionUseCase;
+
 
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionUseCase questionUseCase;
 
     @GetMapping("/technology/{technology}")
-    public List<QuestionEntity> findAllByTechnology(@PathVariable String technology) {
-        System.out.println(technology);
-        return this.questionRepository.findAllByTechnology(technology);
+    public List<QuestionResultDTO> findByTechnology(@PathVariable String technology) {
+        System.out.println("TECH === " + technology);
+        return questionUseCase.findByTechnology(technology);
     }
 }
