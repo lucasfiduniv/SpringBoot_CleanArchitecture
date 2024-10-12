@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.java_springboot.modules.questions.entities.QuestionEntity;
 
 public interface QuestionRepository extends JpaRepository<QuestionEntity, UUID> {
-    
-    List<QuestionEntity> findAllByTechnology(String technology);
+
+    List<QuestionEntity> findByTechnology(String technology);
 }
