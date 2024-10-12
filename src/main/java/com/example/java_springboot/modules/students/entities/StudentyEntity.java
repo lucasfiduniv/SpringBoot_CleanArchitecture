@@ -1,4 +1,4 @@
-package com.example.java_springboot.modules.students.controllers.entities;
+package com.example.java_springboot.modules.students.entities;
 
 import java.util.List;
 import java.util.UUID;
