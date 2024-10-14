@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class QuestionAnswerDTO {
     private String id;
     private String alternativeId;
+    private Boolean isCorrect;
 }
