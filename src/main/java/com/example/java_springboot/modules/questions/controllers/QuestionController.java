@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.java_springboot.modules.questions.dto.QuestionResultDTO;
 import com.example.java_springboot.modules.questions.useCases.QuestionUseCase;
 
-
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
@@ -21,7 +20,7 @@ public class QuestionController {
 
     @GetMapping("/technology/{technology}")
     public List<QuestionResultDTO> findByTechnology(@PathVariable String technology) {
-        System.out.println("TECH === " + technology);
+
         return questionUseCase.findByTechnology(technology);
     }
 }
