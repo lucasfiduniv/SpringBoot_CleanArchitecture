@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.java_springboot.modules.students.dto.StudentCertificationAnswerDTO;
 import com.example.java_springboot.modules.students.dto.VerifyHasCertificationDTO;
+import com.example.java_springboot.modules.students.entities.CertificationStudentEntity;
 import com.example.java_springboot.modules.students.useCases.StudentCertificationAnswersUseCase;
 import com.example.java_springboot.modules.students.useCases.VerifyIfHasCertificationUseCase;
 
@@ -15,23 +16,24 @@ import com.example.java_springboot.modules.students.useCases.VerifyIfHasCertific
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private VerifyIfHasCertificationUseCase verifyIfHasCertificationUseCase;
+   @Autowired
+   private VerifyIfHasCertificationUseCase verifyIfHasCertificationUseCase;
 
-    @Autowired
-    private StudentCertificationAnswersUseCase studentCertificationAnswersUseCase;
+   @Autowired
+   private StudentCertificationAnswersUseCase studentCertificationAnswersUseCase;
 
-    @PostMapping("/verifyIfhasCertification")
-    public String verifyIfhasCertification(@RequestBody VerifyHasCertificationDTO verifyHasCertificationDTO) {
-     var result = this.verifyIfHasCertificationUseCase.execute(verifyHasCertificationDTO);
-     if(result) {
-        return "usuario ja fez a prova";
-     }
-        return "usuario nao fez a prova";
-    }
+   @PostMapping("/verifyIfhasCertification")
+   public String verifyIfhasCertification(@RequestBody VerifyHasCertificationDTO verifyHasCertificationDTO) {
+      var result = this.verifyIfHasCertificationUseCase.execute(verifyHasCertificationDTO);
+      if (result) {
+         return "usuario ja fez a prova";
+      }
+      return "usuario nao fez a prova";
+   }
 
-    @PostMapping("/certification/answer")
-    public StudentCertificationAnswerDTO certificationAnswer(@RequestBody StudentCertificationAnswerDTO studentCertificationAnswerDTO) {
-       return this.studentCertificationAnswersUseCase.execute(studentCertificationAnswerDTO);
-    }
+   @PostMapping("/certification/answer")
+   public CertificationStudentEntity certificationAnswer(
+         @RequestBody StudentCertificationAnswerDTO studentCertificationAnswerDTO) {
+      return this.studentCertificationAnswersUseCase.execute(studentCertificationAnswerDTO);
+   }
 }
