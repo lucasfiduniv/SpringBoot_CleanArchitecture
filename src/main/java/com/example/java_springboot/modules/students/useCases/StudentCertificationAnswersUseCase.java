@@ -11,6 +11,7 @@ import com.example.java_springboot.modules.questions.entities.AlternativesEntity
 import com.example.java_springboot.modules.questions.entities.QuestionEntity;
 import com.example.java_springboot.modules.questions.repositories.QuestionRepository;
 import com.example.java_springboot.modules.students.dto.StudentCertificationAnswerDTO;
+import com.example.java_springboot.modules.students.dto.VerifyHasCertificationDTO;
 import com.example.java_springboot.modules.students.entities.AnswersCertificationsEntity;
 import com.example.java_springboot.modules.students.entities.CertificationStudentEntity;
 import com.example.java_springboot.modules.students.entities.StudentEntity;
@@ -29,11 +30,22 @@ public class StudentCertificationAnswersUseCase {
 	@Autowired
 	private CertificationStudentRepository certificationStudentRepository;
 
+	@Autowired
+	public VerifyIfHasCertificationUseCase verifyIfHasCertificationUseCase;
+
 	public StudentCertificationAnswersUseCase(QuestionRepository questionRepository) {
 		this.questionRepository = questionRepository;
 	}
 
-	public CertificationStudentEntity execute(StudentCertificationAnswerDTO studentCertificationAnswerDTO) {
+	public CertificationStudentEntity execute(StudentCertificationAnswerDTO studentCertificationAnswerDTO)
+			throws Exception {
+		var hasCertification = this.verifyIfHasCertificationUseCase
+				.execute(new VerifyHasCertificationDTO(studentCertificationAnswerDTO.getEmail(),
+						studentCertificationAnswerDTO.getTechnology()));
+
+		if (hasCertification) {
+			throw new Exception("Student already has certification");
+		}
 		List<AnswersCertificationsEntity> answersCertificationsEntities = new ArrayList<>();
 
 		List<QuestionEntity> questionsEntity = questionRepository
