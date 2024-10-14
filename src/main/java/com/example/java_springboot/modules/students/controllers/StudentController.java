@@ -30,7 +30,7 @@ public class StudentController {
         return "usuario nao fez a prova";
     }
 
-    @PostMapping("/certificationAnswer")
+    @PostMapping("/certification/answer")
     public StudentCertificationAnswerDTO certificationAnswer(@RequestBody StudentCertificationAnswerDTO studentCertificationAnswerDTO) {
        return this.studentCertificationAnswersUseCase.execute(studentCertificationAnswerDTO);
     }
